@@ -11,7 +11,7 @@
              <packaging>pom</packaging>
     </parent>
     <artifactId>module-2</artifactId>
-
+ <packaging>pom</packaging>
     
 <dependencies>
         <dependency>
