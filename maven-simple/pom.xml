@@ -13,7 +13,7 @@
 
   
   <artifactId>maven-simple</artifactId> 
-      <packaging>pom</packaging>
+      <packaging>jar</packaging>
          
 
   <dependencies>
