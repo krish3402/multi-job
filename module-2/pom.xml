@@ -13,5 +13,12 @@
     <artifactId>module-2</artifactId>
  <packaging>jar</packaging>
     
-
+<dependencies>
+        <dependency>
+            <groupId>com.mlesniak.jacoco</groupId>
+            <artifactId>module-1</artifactId>
+            <version>1.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 </project>
