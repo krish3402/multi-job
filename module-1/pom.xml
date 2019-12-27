@@ -11,6 +11,6 @@
              <packaging>pom</packaging>
     </parent>
     <artifactId>module-1</artifactId> 
-                  
+      <packaging>pom</packaging>             
                         
 </project>
