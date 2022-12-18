@@ -1,0 +1,42 @@
+name: actions-script
+
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'FOUNDATION'
+        required: true
+        default: 'np-west'
+        type: choice
+        options:
+        - sb-west
+        - np-east
+        - np-west
+      tags:
+        description: 'APPS_RESTAGE'
+        required: false
+        type: boolean
+
+env:
+  CF_STARTUP_TIMEOUT: 30
+  api: pcfInfo.foundations${{ inputs.logLevel }}.api
+jobs:
+  ConfigServers_Restagee:  
+    runs-on: ubuntu-latest
+    steps:
+      - uses: citizen-of-planet-earth/cf-cli-action@master
+      - name: Get Config Servers to Restagee
+        run: |
+          cf login -a ${{ env.api }} -u ${{ secrets.PCF_USER }} -p ${{ secrets.PCF_PASS }} --skip-ssl-validation  
+          chmod +x ${{ github.workspace }}/get_apps_list_to_restage.sh 
+          sh ./get_apps_list_to_restage.sh
+  Restage:
+    if: ${{ inputs.tags == true }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: citizen-of-planet-earth/cf-cli-action@master
+      - name: Restage
+        run: |
+          cf login -a ${{ env.api }} -u ${{ secrets.PCF_USER }} -p ${{ secrets.PCF_PASS }} --skip-ssl-validation  
+          chmod +x ${{ github.workspace }}/get_apps_list_to_restage.sh 
+          sh ./get_apps_list_to_restage.sh  
